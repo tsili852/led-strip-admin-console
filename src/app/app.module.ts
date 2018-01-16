@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ProjectService } from './project.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

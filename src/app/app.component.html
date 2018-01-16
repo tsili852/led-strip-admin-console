@@ -25,15 +25,18 @@
     <mat-drawer-container class="side-menu-container" autosize>
       <mat-drawer style="width:180px" mode="side" opened="true">
         <label id="drawer-header">Projects</label>
-        <button class="drawer-button" mat-raised-button>Alpina Project</button>
-        <button class="drawer-button" mat-raised-button>Project X</button>
-        <button id="drawer-add-button" mat-mini-fab color="primary">
+        <button mat-raised-button class="drawer-button" *ngFor="let project of allProjectsObs | async" (click)="onProjectSelect(project.description)">{{project.description}}</button>
+        <!-- <button mat-raised-button class="drawer-button" *ngFor="let project of projectArray">{{project.description}}</button> -->
+        <button id="drawer-add-button" mat-mini-fab color="accent">
             <mat-icon aria-label="Add">add</mat-icon>
           </button>
       </mat-drawer>
       <mat-drawer-content class="main-content-container">
         <mat-list>
-          <h4 style="text-align:center">Main Content</h4>
+          <h2 style="text-align:center">{{selectedProject.description}}</h2>
+          <label style="display:block;text-align:center">{{selectedProject.ip}}</label>
+          <label style="display:block;text-align:center">{{selectedProject.userPassword}}</label>
+          <label style="display:block;text-align:center">{{selectedProject.adminPassword}}</label>
         </mat-list>
       </mat-drawer-content>
     </mat-drawer-container>

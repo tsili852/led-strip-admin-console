@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Config } from './shared/config';
+
+@Injectable()
+export class ProjectService {
+
+  constructor(private httpClient: HttpClient) { }
+
+  getAllProjects(): Observable<any> {
+    return this.httpClient.get(`${Config.apiUrl}project/getall`);
+  }
+
+  getOne(description: string) {
+    return this.httpClient.get(`${Config.apiUrl}project/${description}`);
+  }
+
+}
