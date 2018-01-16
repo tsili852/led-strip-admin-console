@@ -1,11 +1,41 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+    <button fxShow="true" fxHide.gt-sm="true" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <span>Led Admin Console</span>
 
     <span class="example-spacer"></span>
 
-    <button mat-button>Settings</button>
-    <button mat-button>Services</button>
-    <button mat-button>Contact</button>
+    <div fxShow="true" fxHide.lt-md="true">
+      <button mat-button>Settings</button>
+      <button mat-button>Clients</button>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-sidenav-container fxFlexFill class="sidenav-container" autosize>
+  <mat-sidenav #sidenav fxLayout="column">
+    <div fxLayout="column">
+      <button mat-button>Settings</button>
+      <button mat-button>Clients</button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <mat-drawer-container class="side-menu-container" autosize>
+      <mat-drawer style="width:180px" mode="side" opened="true">
+        <label id="drawer-header">Projects</label>
+        <button class="drawer-button" mat-raised-button>Alpina Project</button>
+        <button class="drawer-button" mat-raised-button>Project X</button>
+        <button id="drawer-add-button" mat-mini-fab color="primary">
+            <mat-icon aria-label="Add">add</mat-icon>
+          </button>
+      </mat-drawer>
+      <mat-drawer-content class="main-content-container">
+        <mat-list>
+          <h4 style="text-align:center">Main Content</h4>
+        </mat-list>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

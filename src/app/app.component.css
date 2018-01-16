@@ -5,3 +5,35 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.sidenav-container {
+  width: 200px;
+  height: 200px;
+}
+
+.side-menu-container {
+  /* width: 200px; */
+  /* height: 200px; */
+  min-height: 500px;
+}
+
+#drawer-header {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: underline;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.drawer-button {
+  width: 95%;
+  margin: 1px;
+}
+
+#drawer-add-button {
+  float: right;
+  margin-top: 15px;
+  margin-right: 10px;
+}
