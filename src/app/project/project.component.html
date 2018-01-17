@@ -1,0 +1,40 @@
+<mat-grid-list cols="4" rowHeight="1:3">
+  <mat-grid-tile colspan="1" style="margin-left:10px">
+    <form class="project-info-form">
+      <h3 id="form-header">Information</h3>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Project Name" [(ngModel)]="_selectedProject.description" name="description">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Ip Address" [(ngModel)]="_selectedProject.ip" name="ip">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="User Password" [(ngModel)]="_selectedProject.userPassword" name="userPassword">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Admin Password" [(ngModel)]="_selectedProject.adminPassword" name="adminPassword">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Save</button>
+    </form>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3">
+    <mat-list role="list" class="space-list">
+      <h3>Structure</h3>
+      <mat-list-item *ngFor="let space of spaceList" class="space-list-item" 
+        [class.project-level]="space.level == 0"
+        [class.building-level]="space.level == 1"
+        [class.floor-level]="space.level == 2"
+        [class.appartment-level]="space.level == 3"
+        (click)="onSpaceSelect(space.description)">
+        <p mat-line>{{space.description}}</p>
+        <button mat-icon-button [style.visibility]="space.level != 3 ? 'visible' : 'hidden'">
+          <mat-icon>add</mat-icon>
+        </button>
+        <div class="color-display" 
+          [style.backgroundColor]="space.colorRGB"
+          [style.visibility]="space.level == 3 ? 'visible' : 'hidden'"></div>
+        <!-- <mat-icon class="add-icon">add</mat-icon> -->
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+</mat-grid-list>

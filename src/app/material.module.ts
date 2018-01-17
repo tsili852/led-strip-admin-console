@@ -4,8 +4,11 @@ import { MatToolbarModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     declarations: [],
@@ -16,7 +19,10 @@ import {MatMenuModule} from '@angular/material/menu';
       MatSidenavModule,
       MatIconModule,
       MatListModule,
-      MatMenuModule
+      MatMenuModule,
+      MatGridListModule,
+      MatFormFieldModule,
+      MatInputModule
     ],
     exports: [
       MatToolbarModule,
@@ -24,7 +30,10 @@ import {MatMenuModule} from '@angular/material/menu';
       MatSidenavModule,
       MatIconModule,
       MatListModule,
-      MatMenuModule
+      MatMenuModule,
+      MatGridListModule,
+      MatFormFieldModule,
+      MatInputModule
     ],
     providers: [],
 })

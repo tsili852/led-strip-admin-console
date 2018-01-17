@@ -1,0 +1,57 @@
+.project-info-form {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.project-info-form > .form-field {
+    width: 100%;
+}
+
+#form-header {
+    text-align: center;
+}
+
+.space-list {
+    height: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 35%;
+}
+
+.space-list-item {
+    height: 40px !important;
+    margin-bottom: 5px;
+    background-color: #e5e9f1;
+    border: 1px solid #e5e9f1;
+}
+
+/deep/ .space-list-item .mat-list-item-content{
+    padding-right: 0px !important;
+}
+
+.add-icon {
+    margin-left: 10px;
+}
+
+.project-level {
+    background-color: #a2b0fb;
+}
+
+.building-level {
+    margin-left: 20px;
+}
+
+.floor-level {
+    margin-left: 40px;
+}
+
+.appartment-level {
+    margin-left: 80px;
+}
+
+.color-display {
+    width: 20px;
+    height: 100%;
+}

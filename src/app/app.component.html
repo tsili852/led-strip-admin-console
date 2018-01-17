@@ -32,12 +32,13 @@
           </button>
       </mat-drawer>
       <mat-drawer-content class="main-content-container">
-        <mat-list>
+        <app-project [selectedProject]="selectedProject"></app-project>
+        <!-- <mat-list>
           <h2 style="text-align:center">{{selectedProject.description}}</h2>
           <label style="display:block;text-align:center">{{selectedProject.ip}}</label>
           <label style="display:block;text-align:center">{{selectedProject.userPassword}}</label>
           <label style="display:block;text-align:center">{{selectedProject.adminPassword}}</label>
-        </mat-list>
+        </mat-list> -->
       </mat-drawer-content>
     </mat-drawer-container>
   </mat-sidenav-content>

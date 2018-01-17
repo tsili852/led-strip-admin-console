@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from './project.service';
+import { ProjectService } from './shared/project/project.service';
+import { Project } from './shared/project/project';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
+  providers: [ProjectService],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Led strip';
-
   allProjectsObs: Observable<any>;
   selectedProjectObj: Observable<any>;
-  selectedProject: {
-    description: string,
-    userPassword: string,
-    adminPassword: string,
-    ip: string,
-    id: string
-  };
+  selectedProject;
+  projectSubscription: Subscription;
 
   constructor(private projectService: ProjectService) {
 
@@ -26,34 +22,27 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.allProjectsObs = this.projectService.getAllProjects();
-    // this.projectService.getAllProjects()
-    //   .subscribe(respose => {
-    //       this.projectArray = respose;
-    //       this.projectSimpleArray = new Array<{description: string, id: string}>();
-    //       this.projectArray.forEach(project => {
-    //         this.projectSimpleArray.push({
-    //           description: project.description,
-    //           id: project.id
-    //         });
-    //       });
-    //   });
-    this.selectedProject = {
-      description: '',
-      id: '',
-      adminPassword: '',
-      ip: '',
-      userPassword: ''
-    };
+    // this.selectedProject = {
+    //   description: 'Select',
+    //   adminPassword: '',
+    //   id: '',
+    //   ip: '',
+    //   userPassword: ''
+    // };
+    this.allProjectsObs.subscribe(data => {
+      this.selectedProjectObj = this.projectService.getOne(data[0].description);
+
+      this.selectedProjectObj.subscribe(prj => {
+        this.selectedProject = prj;
+      });
+    });
   }
 
   onProjectSelect(description: string) {
     this.selectedProjectObj = this.projectService.getOne(description);
 
-    this.selectedProjectObj.subscribe(data => {
-      this.selectedProject.description = data.description;
-      this.selectedProject.ip = data.ip;
-      this.selectedProject.adminPassword = data.adminPassword;
-      this.selectedProject.userPassword = data.userPassword;
+    this.selectedProjectObj.subscribe(prj => {
+      this.selectedProject = prj;
     });
   }
 }
