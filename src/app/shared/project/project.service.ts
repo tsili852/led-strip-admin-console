@@ -16,4 +16,8 @@ export class ProjectService {
     return this.httpClient.get(`${Config.apiUrl}project/${description}`);
   }
 
+  saveSettings(project: any) {
+    return this.httpClient.put(`${Config.apiUrl}project/settings/${project.id}`, project);
+  }
+
 }

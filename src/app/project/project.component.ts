@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '../shared/project/project';
 import { Space } from '../shared/space/space';
 import { ProjectService } from '../shared/project/project.service';
+import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-project',
@@ -16,8 +18,17 @@ export class ProjectComponent implements OnInit {
     this.fillSpaceListFromData();
   }
   spaceList: Array<Space>;
+  selectedSpace: Space;
 
-  constructor(private projectService: ProjectService) {
+  inputFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  constructor(
+    private projectService: ProjectService,
+    private snackBar: MatSnackBar
+  ) {
     this.spaceList = new Array<Space>();
   }
 
@@ -51,10 +62,55 @@ export class ProjectComponent implements OnInit {
         });
       });
     });
+
+    this.selectedSpace = this.spaceList[0];
   }
 
-  onSpaceSelect(description) {
-    alert(`You selected : ${description}`);
+  onSpaceSelect(index) {
+    this.selectedSpace = this.spaceList[index];
   }
 
+  onSaveSettings() {
+    if (this._selectedProject.description && this._selectedProject.userPassword && this._selectedProject.adminPassword) {
+      this.projectService.saveSettings(this._selectedProject)
+      .subscribe(response => {
+        this.snackBar.open('Project settings saved', 'Close', {
+          duration: 2000
+        });
+      },
+      err => {
+        console.log(`Error: ${JSON.stringify(err)}`);
+      });
+    }
+  }
+
+  onAddSpace(index) {
+    const room = this.spaceList[index];
+    if (room) {
+      // alert(`Add space bellow: ${room.description}`);
+      if (room.level === 0) {
+        const newBuilding = {
+          status: false,
+          level: 1,
+          description: 'Batiment X',
+          floor: []
+        };
+        this._selectedProject.buildings.push(newBuilding);
+      } else if (room.level === 1) {
+        this._selectedProject.buildings.forEach(building => {
+          if (building.id === room.id) {
+            const newFloor = {
+              status: false,
+              level: 2,
+              description: 'Etage X',
+              appartments: []
+            };
+            building.floors.push(newFloor);
+          }
+        });
+      } else if (room.level === 2) {
+        alert('Add Appartment');
+      }
+    }
+  }
 }

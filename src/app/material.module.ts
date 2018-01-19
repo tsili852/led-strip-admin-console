@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [],
@@ -22,7 +24,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       MatMenuModule,
       MatGridListModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      MatSlideToggleModule,
+      MatSnackBarModule
     ],
     exports: [
       MatToolbarModule,
@@ -33,7 +37,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       MatMenuModule,
       MatGridListModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      MatSlideToggleModule,
+      MatSnackBarModule
     ],
     providers: [],
 })

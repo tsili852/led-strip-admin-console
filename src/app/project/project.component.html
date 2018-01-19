@@ -1,40 +1,52 @@
-<mat-grid-list cols="4" rowHeight="1:3">
+<mat-grid-list cols="5" rowHeight="1:3">
   <mat-grid-tile colspan="1" style="margin-left:10px">
     <form class="project-info-form">
       <h3 id="form-header">Information</h3>
       <mat-form-field class="form-field">
-        <input matInput placeholder="Project Name" [(ngModel)]="_selectedProject.description" name="description">
+        <input matInput placeholder="Project Name"
+          [(ngModel)]="_selectedProject.description"
+          required
+          name="description">
       </mat-form-field>
       <mat-form-field class="form-field">
         <input matInput placeholder="Ip Address" [(ngModel)]="_selectedProject.ip" name="ip">
       </mat-form-field>
       <mat-form-field class="form-field">
-        <input matInput placeholder="User Password" [(ngModel)]="_selectedProject.userPassword" name="userPassword">
+        <input matInput placeholder="User Password" [(ngModel)]="_selectedProject.userPassword" name="userPassword" required>
       </mat-form-field>
       <mat-form-field class="form-field">
-        <input matInput placeholder="Admin Password" [(ngModel)]="_selectedProject.adminPassword" name="adminPassword">
+        <input matInput placeholder="Admin Password" [(ngModel)]="_selectedProject.adminPassword" name="adminPassword" required>
       </mat-form-field>
-      <button mat-raised-button color="primary">Save</button>
+      <button mat-raised-button color="primary" (click)="onSaveSettings()">Save</button>
     </form>
   </mat-grid-tile>
-  <mat-grid-tile colspan="3">
+  <mat-grid-tile colspan="2">
     <mat-list role="list" class="space-list">
-      <h3>Structure</h3>
-      <mat-list-item *ngFor="let space of spaceList" class="space-list-item" 
-        [class.project-level]="space.level == 0"
-        [class.building-level]="space.level == 1"
-        [class.floor-level]="space.level == 2"
-        [class.appartment-level]="space.level == 3"
-        (click)="onSpaceSelect(space.description)">
+      <h3 id="structure-header">Structure</h3>
+      <mat-list-item *ngFor="let space of spaceList; let i = index" class="space-list-item" [class.project-level]="space.level == 0"
+        [class.building-level]="space.level == 1" [class.floor-level]="space.level == 2" [class.appartment-level]="space.level == 3"
+        (click)="onSpaceSelect(i)">
         <p mat-line>{{space.description}}</p>
-        <button mat-icon-button [style.visibility]="space.level != 3 ? 'visible' : 'hidden'">
+        <button mat-icon-button [style.visibility]="space.level != 3 ? 'visible' : 'hidden'" (click)="onAddSpace(i)">
           <mat-icon>add</mat-icon>
         </button>
-        <div class="color-display" 
-          [style.backgroundColor]="space.colorRGB"
-          [style.visibility]="space.level == 3 ? 'visible' : 'hidden'"></div>
-        <!-- <mat-icon class="add-icon">add</mat-icon> -->
+        <div class="color-display" [style.backgroundColor]="space.colorRGB" [style.visibility]="space.level == 3 ? 'visible' : 'hidden'"></div>
       </mat-list-item>
     </mat-list>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <form class="project-info-form">
+      <h3 id="form-header">Space Details</h3>
+      <mat-slide-toggle id="space-status" [checked]="selectedSpace.status">
+        On/Off
+      </mat-slide-toggle>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Description" [(ngModel)]="selectedSpace.description" name="description" required>
+      </mat-form-field>
+      <mat-form-field class="form-field" [style.visibility]="selectedSpace.level == 3 ? 'visible' : 'collapse'">
+        <input matInput placeholder="Led Indexes" [(ngModel)]="selectedSpace.ledIndex" name="ledIndex">
+      </mat-form-field>
+      <button mat-raised-button color="accent">Save</button>
+    </form>
   </mat-grid-tile>
 </mat-grid-list>
