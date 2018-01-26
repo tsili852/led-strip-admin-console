@@ -8,8 +8,7 @@
     <span class="example-spacer"></span>
 
     <div fxShow="true" fxHide.lt-md="true">
-      <button mat-button>Settings</button>
-      <button mat-button>Clients</button>
+      <p style="font-size:12px">Version: 0.5</p>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -17,19 +16,23 @@
 <mat-sidenav-container fxFlexFill class="sidenav-container" autosize>
   <mat-sidenav #sidenav fxLayout="column">
     <div fxLayout="column">
-      <button mat-button>Settings</button>
-      <button mat-button>Clients</button>
+        <label id="drawer-header">Projects</label>
+        <button mat-raised-button class="drawer-button" *ngFor="let project of allProjectsObs | async" (click)="onProjectSelect(project.description)">{{project.description}}</button>
+        <!-- <button mat-raised-button class="drawer-button" *ngFor="let project of projectArray">{{project.description}}</button> -->
+        <button id="drawer-add-button" mat-mini-fab color="accent" (click)="openDialog()">
+          <mat-icon aria-label="Add">add</mat-icon>
+        </button>
     </div>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
     <mat-drawer-container class="side-menu-container" autosize>
-      <mat-drawer style="width:180px" mode="side" opened="true">
+      <mat-drawer style="width:180px" mode="side" opened="true" fxHide.lt-md="true">
         <label id="drawer-header">Projects</label>
         <button mat-raised-button class="drawer-button" *ngFor="let project of allProjectsObs | async" (click)="onProjectSelect(project.description)">{{project.description}}</button>
         <!-- <button mat-raised-button class="drawer-button" *ngFor="let project of projectArray">{{project.description}}</button> -->
-        <button id="drawer-add-button" mat-mini-fab color="accent">
-            <mat-icon aria-label="Add">add</mat-icon>
-          </button>
+        <button id="drawer-add-button" mat-mini-fab color="accent" (click)="onAddProject()">
+          <mat-icon aria-label="Add">add</mat-icon>
+        </button>
       </mat-drawer>
       <mat-drawer-content class="main-content-container">
         <app-project [selectedProject]="selectedProject"></app-project>

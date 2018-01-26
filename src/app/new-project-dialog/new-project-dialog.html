@@ -1,0 +1,10 @@
+<h1 style="text-decoration:underline;text-align:center" mat-dialog-title>New Project</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input placeholder="Project Name" matInput [(ngModel)]="data.projectName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data.projectName" cdkFocusInitial>Create</button>
+</div>

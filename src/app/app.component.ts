@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ProjectService } from './shared/project/project.service';
 import { Project } from './shared/project/project';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { NewProjectDialogComponent } from './new-project-dialog/new-project-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -15,20 +17,12 @@ export class AppComponent implements OnInit {
   selectedProjectObj: Observable<any>;
   selectedProject;
   projectSubscription: Subscription;
+  newProjectName: string;
 
-  constructor(private projectService: ProjectService) {
-
-  }
+  constructor(private projectService: ProjectService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.allProjectsObs = this.projectService.getAllProjects();
-    // this.selectedProject = {
-    //   description: 'Select',
-    //   adminPassword: '',
-    //   id: '',
-    //   ip: '',
-    //   userPassword: ''
-    // };
     this.allProjectsObs.subscribe(data => {
       this.selectedProjectObj = this.projectService.getOne(data[0].description);
 
@@ -43,6 +37,31 @@ export class AppComponent implements OnInit {
 
     this.selectedProjectObj.subscribe(prj => {
       this.selectedProject = prj;
+    });
+  }
+
+  onAddProject() {
+    const dialogRef = this.dialog.open(NewProjectDialogComponent, {
+      data: { projectName: this.newProjectName }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        this.snackBar.open('You have to define a name', 'Close', {
+          duration: 2000
+        });
+      } else {
+        this.newProjectName = result;
+        this.projectService.createProject(this.newProjectName)
+          .subscribe(res => {
+            this.snackBar.open(`Project ${this.newProjectName} created`, 'Close', {
+              duration: 2000
+            });
+          },
+          err => {
+            console.log(`Error on project creation: ${JSON.stringify(err)}`);
+          });
+      }
     });
   }
 }

@@ -10,7 +10,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [],
@@ -26,7 +27,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
       MatFormFieldModule,
       MatInputModule,
       MatSlideToggleModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatDialogModule
     ],
     exports: [
       MatToolbarModule,
@@ -39,7 +41,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
       MatFormFieldModule,
       MatInputModule,
       MatSlideToggleModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatDialogModule
     ],
     providers: [],
 })

@@ -9,6 +9,17 @@
     width: 100%;
 }
 
+.space-info-form {
+    width: 70%;
+    height: 100%;
+    padding: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.space-info-form > .form-field {
+    width: 100%;
+}
+
 #form-header {
     text-align: center;
 }
@@ -18,6 +29,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     width: 70%;
+    overflow-y: auto;
 }
 
 .space-list-item {
@@ -56,10 +68,24 @@
     height: 100%;
 }
 
+#color-value {
+    width: 90%;
+}
+
+.color-display-in-space {
+    width: 20px;
+    height: 20px;
+}
+
 #space-status {
     margin-bottom: 10px;
 }
 
 #structure-header {
     text-align: center;
+}
+
+#delete-button {
+    background-color: rgb(241, 66, 66);
+    color: white;
 }
